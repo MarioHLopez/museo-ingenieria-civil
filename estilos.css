@@ -185,3 +185,45 @@ div[class*="st-key-publicacion-"] [data-testid="stExpander"] summary p { font-si
   .st-key-docente .carta-docente p { font-size: .85rem; }
   .feed-intro { padding-top: 0; }
 }
+
+/* Anuncios web noventeros, anclados a ambos lados del recorrido. */
+.anuncio-clase { position: fixed; top: 30vh; width: clamp(120px, calc((100vw - 840px) / 2 - 24px), 190px); z-index: 10; font-family: 'Courier New', monospace; }
+.anuncio-clase-izquierda { left: max(12px, calc((100vw - 1240px) / 2)); }
+.anuncio-clase-derecha { right: max(12px, calc((100vw - 1240px) / 2)); }
+.anuncio-tarjeta { display: block; color: #ffff00; border: 4px outset #e8e8e8; background: #ff00b7; box-shadow: 6px 6px 0 #150035; animation: anuncio-neon 8s step-end infinite; }
+.anuncio-clase-derecha .anuncio-tarjeta { animation-delay: -4s; }
+.anuncio-ventana { display: flex; justify-content: space-between; align-items: center; gap: 4px; padding: 5px; background: #000080; color: white; font-size: 10px; font-weight: bold; }
+.anuncio-ventana b { white-space: nowrap; color: #111; background: #c0c0c0; padding: 0 3px; }
+.anuncio-contenido { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px 7px; text-align: center; background-image: radial-gradient(#ffffff60 1px, transparent 1px); background-size: 10px 10px; }
+.anuncio-nuevo { background: #111; color: #00ffae; padding: 4px; font-size: 12px; font-weight: bold; transform: rotate(-5deg); }
+.anuncio-pc { width: 100%; max-width: 150px; height: auto; filter: drop-shadow(3px 3px 0 #0006); }
+.anuncio-clase strong { color: inherit; font: 900 clamp(18px, 1.7vw, 25px)/1.1 'Courier New', monospace; text-transform: uppercase; text-shadow: 2px 2px #16004b; overflow-wrap: anywhere; }
+.anuncio-elogios { display: grid; width: 100%; }
+.anuncio-elogio { grid-area: 1 / 1; visibility: hidden; animation: anuncio-frase 16s step-end infinite; }
+@keyframes anuncio-frase {
+  0% { visibility: visible; }
+  25%, 100% { visibility: hidden; }
+}
+.anuncio-mensaje { font-size: 11px; font-weight: bold; color: #fff; background: #16004b; padding: 5px 3px; }
+.anuncio-clic { color: #000; background: #ffff00; border: 3px outset #fff; padding: 8px 3px; font-size: 11px; font-weight: bold; }
+.anuncio-pie { color: #fff; background: #000; padding: 3px; font-size: 9px; }
+.anuncio-tarjeta:hover { animation: none; opacity: 1; background-color: #ff00b7; }
+@keyframes anuncio-neon {
+  0% { opacity: 1; background-color: #ff00b7; }
+  25% { opacity: 0; }
+  37.5% { opacity: 1; background-color: #6100ff; }
+  62.5% { opacity: 1; background-color: #007b45; }
+  87.5% { opacity: 0; }
+}
+@media (max-width: 1120px) {
+  .anuncio-clase { position: static; width: min(100%, 780px); margin: 0 auto 12px; }
+  .anuncio-clase-derecha { display: none; }
+  .anuncio-contenido { flex-direction: row; justify-content: center; flex-wrap: wrap; gap: 10px; padding: 10px; }
+  .anuncio-pc { width: 60px; }
+  .anuncio-clase strong { font-size: 20px; max-width: 260px; }
+  .anuncio-mensaje, .anuncio-pie { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .anuncio-tarjeta, .anuncio-elogio { animation: none; }
+  .anuncio-elogio:first-child { visibility: visible; }
+}

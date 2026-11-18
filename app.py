@@ -3,6 +3,7 @@
 from base64 import b64encode
 from html import escape
 from pathlib import Path
+from random import sample
 
 import pymupdf
 import streamlit as st
@@ -16,6 +17,21 @@ TITULO = "Ideas que construyen"
 DOCENTE = "Mg. Mario Hernan Lopez Arbelaez"
 CURSO = "Programación · Ingeniería Civil"
 PERIODO = "2026"
+ENLACE_CLASE = "https://teams.microsoft.com/meet/271941027693903?p=gOhUIeFDUP6dyKhkFe"
+ELOGIOS_OBRAS = (
+    "¡Talento a prueba de sismos!",
+    "¡Esto sí tiene buenos cimientos!",
+    "¡Creatividad que no se agrieta!",
+    "¡Una obra de alto calibre!",
+    "¡Aquí sobra ingenio, no concreto!",
+    "¡Nivel de obra: una berraquera!",
+    "¡Más ideas que ladrillos!",
+    "¡Esta obra se lleva los aplausos!",
+    "¡Ingenio con casco y mucho estilo!",
+    "¡Una estructura de puro talento!",
+    "¡Ni el compás mide tanto talento!",
+    "¡Estos trazos construyen sonrisas!",
+)
 ARCHIVOS_ENTREGAS = (
     "Dockerfile.zip",
     "RA_2_11_3_11377_01CIVIL_20262_ARM-La regla de cálculo y el arte de resolver problemas-2835700.zip",
@@ -164,6 +180,36 @@ st.markdown(
     + (BASE / "instrumentos_derecha.svg").read_text(encoding="utf-8")
     + '</div>', unsafe_allow_html=True,
 )
+if "elogios_laterales" not in st.session_state:
+    st.session_state.elogios_laterales = sample(ELOGIOS_OBRAS, 8)
+for indice_lado, lado in enumerate(("izquierda", "derecha")):
+    mensajes = st.session_state.elogios_laterales[indice_lado * 4:(indice_lado + 1) * 4]
+    elogios = "".join(
+        f'<span class="anuncio-elogio" style="animation-delay: {indice * 4}s">{escape(mensaje)}</span>'
+        for indice, mensaje in enumerate(mensajes)
+    )
+    st.markdown(f"""
+    <aside class="anuncio-clase anuncio-clase-{lado}" aria-label="Celebramos el talento de nuestros estudiantes">
+      <div class="anuncio-tarjeta">
+        <span class="anuncio-ventana" aria-hidden="true">AULA CIVIL.exe <b>_ □ ×</b></span>
+        <span class="anuncio-contenido">
+          <span class="anuncio-nuevo">★ PURO TALENTO ★</span>
+          <svg class="anuncio-pc" viewBox="0 0 160 120" aria-hidden="true" fill="none">
+            <path d="M20 8h120v80H20z" fill="#c0c0c0" stroke="#111" stroke-width="4"/>
+            <path d="M30 18h100v58H30z" fill="#16004b" stroke="#fff" stroke-width="2"/>
+            <path d="m60 38-12 10 12 10m40-20 12 10-12 10M88 30 74 66" stroke="#00ffae" stroke-width="5"/>
+            <path d="M65 88v12h30V88M35 101h90l15 12H20z" fill="#c0c0c0" stroke="#111" stroke-width="4"/>
+            <path d="M38 106h84" stroke="#fff" stroke-width="3"/>
+            <path d="m8 23 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1zM149 65l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" fill="#ffff00"/>
+          </svg>
+          <strong class="anuncio-elogios">{elogios}</strong>
+          <span class="anuncio-mensaje">100% INGENIO ESTUDIANTIL</span>
+          <span class="anuncio-clic">★ APLAUSOS A ESTA OBRA ★</span>
+          <span class="anuncio-pie">HECHO CON IDEAS Y CORAZÓN</span>
+        </span>
+      </div>
+    </aside>
+    """, unsafe_allow_html=True)
 
 with st.container(key="feed"):
     st.markdown(f'<div class="feed-intro"><span>EL TALENTO DE NUESTRA AULA</span><h1>{escape(TITULO)}</h1><h2>Historias que merecen verse.</h2><p>{escape(CURSO)} · {escape(PERIODO)}</p><p>Un trabajo a la vez. Baja y recorre la exposición.</p></div>', unsafe_allow_html=True)
@@ -194,4 +240,4 @@ with st.container(key="docente"):
       <div class="instruccion-scroll">Cada esfuerzo deja huella. Gracias por ser parte de esta historia.</div>
     </section>
     """, unsafe_allow_html=True)
-    st.button("← Volver a la entrada", on_click=cambiar_sala, args=(False,))
+    st.link_button("¡entrar a clase!", ENLACE_CLASE)
