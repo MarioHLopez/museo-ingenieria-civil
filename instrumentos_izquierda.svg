@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 740" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(50 15) rotate(12 25 100)">
+    <rect width="48" height="205" rx="3"/><path d="M0 15h20m-20 10h12m-12 10h12m-12 10h12m-12 10h20m-20 10h12m-12 10h12m-12 10h12m-12 10h20m-20 10h12m-12 10h12m-12 10h12m-12 10h20m-20 10h12m-12 10h12m-12 10h12m-12 10h20m-20 10h12m-12 10h12"/>
+    <circle cx="31" cy="17" r="4"/>
+  </g>
+  <g transform="translate(14 275)">
+    <path d="M9 130 128 130 9 11Z"/><path d="M31 107h49L31 58Z"/>
+    <path d="M19 130v-9m10 9v-6m10 6v-9m10 9v-6m10 6v-9m10 9v-6m10 6v-9m10 9v-6m10 6v-9m10 9v-6"/>
+  </g>
+  <g transform="translate(25 480)">
+    <circle cx="55" cy="24" r="10"/><path d="M55 14V0m0 34L16 157m39-123 40 123M32 110h47M16 157l-6 18m85-18 7 18M43 60l-7-3m30 3 7-3"/>
+    <path d="M19 138q36-19 73 0" stroke-dasharray="3 5"/><circle cx="55" cy="24" r="3"/>
+  </g>
+  <g stroke="none" fill="currentColor" font-family="sans-serif" font-size="8" letter-spacing="2" text-anchor="middle">
+    <text x="80" y="252">ESCALÍMETRO</text><text x="80" y="445">ESCUADRA</text><text x="80" y="705">COMPÁS</text>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 740" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(15 12)">
+    <rect x="37" y="34" width="56" height="43" rx="4"/><path d="M48 34V18h34v16M32 80h67M65 80v21M45 103h40L20 218m59-115 39 115M65 103v115"/>
+    <rect x="20" y="15" width="91" height="14" rx="4"/><circle cx="61" cy="55" r="10"/><path d="M20 19h-7v7h7m91-7h8v7h-8M32 184h66"/>
+  </g>
+  <g transform="translate(13 325) rotate(-10 65 20)">
+    <rect width="134" height="40" rx="6"/><rect x="48" y="10" width="39" height="20" rx="6"/><path d="M68 10v20m-8-20v20M10 12h19v16H10Zm95 0h19v16h-19Z"/><circle cx="67" cy="20" r="4"/>
+  </g>
+  <g transform="translate(12 495)">
+    <path d="M19 80c0-66 98-66 98 0M8 80h121v16H8ZM56 32V17h24v15M39 40 32 69m65-29 7 29M20 96q49 17 97 0"/>
+  </g>
+  <g stroke="none" fill="currentColor" font-family="sans-serif" font-size="8" letter-spacing="2" text-anchor="middle">
+    <text x="80" y="267">TEODOLITO</text><text x="80" y="416">NIVEL</text><text x="80" y="650">CASCO DE OBRA</text>
+  </g>
+</svg>
