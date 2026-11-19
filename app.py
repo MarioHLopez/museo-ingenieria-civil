@@ -17,8 +17,8 @@ TITULO = "Ideas que construyen"
 DOCENTE = "Mg. Mario Hernan Lopez Arbelaez"
 CURSO = "Programación · Ingeniería Civil"
 PERIODO = "2026"
-# Activar de nuevo para mostrar la carta del docente y el acceso a clase.
-MOSTRAR_CIERRE_DOCENTE = False
+MOSTRAR_CIERRE_DOCENTE = True
+MOSTRAR_ACCESO_CLASE = False
 ENLACE_CLASE = "https://teams.microsoft.com/meet/271941027693903?p=gOhUIeFDUP6dyKhkFe"
 ELOGIOS_OBRAS = (
     "¡Talento a prueba de sismos!",
@@ -236,15 +236,22 @@ with st.container(key="docente"):
       <p class="docente-nombre">{escape(DOCENTE)}</p>
       <p class="docente-curso">{escape(CURSO)} · {escape(PERIODO)}</p>
       <div class="carta-linea"></div>
-      <h2>Gracias por construir<br>este semestre conmigo.</h2>
-      <p>A mis estudiantes: gracias por su compromiso, su esfuerzo y la dedicación que pusieron en cada trabajo durante este semestre.</p>
-      <p>Detrás de cada imagen hay preguntas, intentos, aprendizajes y la valentía de seguir adelante. Esta exposición es una forma de reconocer ese camino y celebrar lo que han logrado.</p>
-      <p>Me alegra haber acompañado su proceso. Que la curiosidad y las ganas de aprender sigan siendo los cimientos de todo lo que construyan.</p>
+      <p>A mis estudiantes:</p>
+      <p>Gracias por su compromiso, su esfuerzo y, especialmente, por la disposición de estar presentes, participar y permitirse aprender durante este semestre.</p>
+      <p>Quiero agradecerles también por algo que valoro profundamente: <strong>su disposición a ser enseñables</strong>. Por abrirse a nuevas ideas, cuestionar lo que creían saber, reconocer que no tenemos todas las respuestas y comprender que equivocarse también hace parte del camino.</p>
+      <p>Detrás de cada trabajo hay preguntas, intentos, dificultades, aprendizajes y la valentía de seguir adelante. Esta exposición es una forma de reconocer ese proceso y celebrar lo que cada uno ha logrado construir.</p>
+      <p>Me alegra haberlos acompañado, pero también agradezco lo que ustedes me han permitido aprender como docente. Porque enseñar y aprender son procesos que nos transforman a ambos.</p>
+      <p>Espero que conserven la curiosidad, la humildad para seguir aprendiendo y el carácter para afrontar los desafíos que encuentren en su camino.</p>
+      <p><strong>Que las ganas de aprender, de cuestionar y de construir sigan siendo los cimientos de todo lo que emprendan.</strong></p>
+      <h2 class="agradecimiento-final">Gracias por construir<br>este espacio conmigo.</h2>
       <p class="carta-cierre">Con gratitud y orgullo,<br><strong>{escape(DOCENTE)}</strong><br>Su docente</p>
       <div class="docente-datos"><span><b>{len(obras)}</b> obras</span><span><b>{len({nombre for obra in obras for nombre in obra.estudiantes})}</b> estudiantes</span><span>Un semestre compartido</span></div>
       <div class="instruccion-scroll">Cada esfuerzo deja huella. Gracias por ser parte de esta historia.</div>
     </section>
     """, unsafe_allow_html=True)
+
+if not MOSTRAR_ACCESO_CLASE:
+    st.stop()
 
 st.markdown(f"""
 <a class="clase-flotante" href="{escape(ENLACE_CLASE, quote=True)}"
