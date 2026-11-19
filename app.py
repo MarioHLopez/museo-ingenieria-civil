@@ -17,6 +17,8 @@ TITULO = "Ideas que construyen"
 DOCENTE = "Mg. Mario Hernan Lopez Arbelaez"
 CURSO = "Programación · Ingeniería Civil"
 PERIODO = "2026"
+# Activar de nuevo para mostrar la carta del docente y el acceso a clase.
+MOSTRAR_CIERRE_DOCENTE = False
 ENLACE_CLASE = "https://teams.microsoft.com/meet/271941027693903?p=gOhUIeFDUP6dyKhkFe"
 ELOGIOS_OBRAS = (
     "¡Talento a prueba de sismos!",
@@ -216,6 +218,9 @@ with st.container(key="feed"):
     for numero, obra in enumerate(obras, 1):
         mostrar_publicacion(obra, numero)
 
+if not MOSTRAR_CIERRE_DOCENTE:
+    st.stop()
+
 with st.container(key="docente"):
     foto = next((BASE / nombre for nombre in ("Avatar STEM con laptop y fórmulas.png", "foto_docente.jpg", "foto_docente.png", "avatar.png") if (BASE / nombre).is_file()), None)
     if foto:
@@ -240,4 +245,19 @@ with st.container(key="docente"):
       <div class="instruccion-scroll">Cada esfuerzo deja huella. Gracias por ser parte de esta historia.</div>
     </section>
     """, unsafe_allow_html=True)
-    st.link_button("¡entrar a clase!", ENLACE_CLASE)
+
+st.markdown(f"""
+<a class="clase-flotante" href="{escape(ENLACE_CLASE, quote=True)}"
+   target="_blank" rel="noopener noreferrer" aria-label="¡Entrar a clase! Abrir reunión de Microsoft Teams">
+  <span class="clase-flotante-icono" aria-hidden="true">▶</span>
+  <span class="clase-flotante-texto">
+    <strong>¡Entrar a clase!</strong>
+    <span class="clase-flotante-mensajes" aria-hidden="true">
+      <span>¡Tu próxima gran idea empieza aquí!</span>
+      <span>Del museo al aula… ¡vamos a Teams!</span>
+      <span>¡Ponte el casco de las ideas y entra!</span>
+    </span>
+  </span>
+  <span class="clase-flotante-flecha" aria-hidden="true">↗</span>
+</a>
+""", unsafe_allow_html=True)

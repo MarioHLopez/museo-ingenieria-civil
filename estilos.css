@@ -187,9 +187,18 @@ div[class*="st-key-publicacion-"] [data-testid="stExpander"] summary p { font-si
 }
 
 /* Anuncios web noventeros, anclados a ambos lados del recorrido. */
-.anuncio-clase { position: fixed; top: 30vh; width: clamp(120px, calc((100vw - 840px) / 2 - 24px), 190px); z-index: 10; font-family: 'Courier New', monospace; }
-.anuncio-clase-izquierda { left: max(12px, calc((100vw - 1240px) / 2)); }
-.anuncio-clase-derecha { right: max(12px, calc((100vw - 1240px) / 2)); }
+.anuncio-clase { position: fixed; top: 18vh; width: clamp(120px, calc((100vw - 840px) / 2 - 24px), 190px); z-index: 10; font-family: 'Courier New', monospace; pointer-events: none; visibility: hidden; animation: anuncio-aparecer .01s 4s forwards, anuncio-recorrido 32s 4s ease-in-out infinite; }
+.anuncio-clase-izquierda { left: 16px; }
+.anuncio-clase-derecha { left: calc(100vw - 210px); animation-delay: 7s, 7s; animation-direction: normal, reverse; }
+@keyframes anuncio-aparecer {
+  to { visibility: visible; }
+}
+@keyframes anuncio-recorrido {
+  0%, 100% { left: 16px; transform: translateY(0); }
+  25% { left: calc(50vw - 100px); transform: translateY(50px); }
+  50% { left: calc(100vw - 210px); transform: translateY(0); }
+  75% { left: calc(50vw - 100px); transform: translateY(-50px); }
+}
 .anuncio-tarjeta { display: block; color: #ffff00; border: 4px outset #e8e8e8; background: #ff00b7; box-shadow: 6px 6px 0 #150035; animation: anuncio-neon 8s step-end infinite; }
 .anuncio-clase-derecha .anuncio-tarjeta { animation-delay: -4s; }
 .anuncio-ventana { display: flex; justify-content: space-between; align-items: center; gap: 4px; padding: 5px; background: #000080; color: white; font-size: 10px; font-weight: bold; }
@@ -216,7 +225,7 @@ div[class*="st-key-publicacion-"] [data-testid="stExpander"] summary p { font-si
   87.5% { opacity: 0; }
 }
 @media (max-width: 1120px) {
-  .anuncio-clase { position: static; width: min(100%, 780px); margin: 0 auto 12px; }
+  .anuncio-clase { position: static; width: min(100%, 780px); margin: 0 auto 12px; animation: anuncio-aparecer .01s 4s forwards; }
   .anuncio-clase-derecha { display: none; }
   .anuncio-contenido { flex-direction: row; justify-content: center; flex-wrap: wrap; gap: 10px; padding: 10px; }
   .anuncio-pc { width: 60px; }
@@ -224,6 +233,37 @@ div[class*="st-key-publicacion-"] [data-testid="stExpander"] summary p { font-si
   .anuncio-mensaje, .anuncio-pie { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .anuncio-clase { animation: none; visibility: visible; }
   .anuncio-tarjeta, .anuncio-elogio { animation: none; }
   .anuncio-elogio:first-child { visibility: visible; }
+}
+
+/* Invitación a Teams al finalizar el recorrido, después de la carta. */
+.clase-flotante { position: relative; display: flex; align-items: center; gap: 14px; width: min(480px, 100%); margin: 0 auto 36px; box-sizing: border-box; padding: 14px 18px; border: 3px outset #fff; border-radius: 16px; background: #a50077; color: #fff !important; text-decoration: none !important; box-shadow: 0 6px 0 #200050, 0 12px 30px #20005040; font-family: 'Courier New', monospace; animation: clase-colores 12s step-end infinite; }
+.clase-flotante-icono { display: grid; place-items: center; flex: 0 0 42px; height: 42px; background: #ffff00; color: #24004b; border-radius: 50%; font-size: 20px; box-shadow: 3px 3px 0 #24004b; }
+.clase-flotante-texto { flex: 1; min-width: 0; }
+.clase-flotante strong { display: block; font-size: 21px; line-height: 1.2; color: #ffff00; text-shadow: 2px 2px #24004b; }
+.clase-flotante-mensajes { display: grid; margin-top: 5px; font-size: 11px; line-height: 1.4; }
+.clase-flotante-mensajes > span { grid-area: 1 / 1; visibility: hidden; animation: clase-mensaje 12s step-end infinite; }
+.clase-flotante-mensajes > span:nth-child(2) { animation-delay: 4s; }
+.clase-flotante-mensajes > span:nth-child(3) { animation-delay: 8s; }
+.clase-flotante-flecha { font-size: 28px; color: #ffff00; }
+.clase-flotante:hover, .clase-flotante:focus-visible { animation-play-state: paused; outline: 3px solid #ffff00; outline-offset: 4px; }
+@keyframes clase-colores {
+  0% { background-color: #a50077; }
+  33.333% { background-color: #5420b5; }
+  66.666% { background-color: #00684f; }
+}
+@keyframes clase-mensaje {
+  0% { visibility: visible; }
+  33.333%, 100% { visibility: hidden; }
+}
+@media (max-width: 480px) {
+  .clase-flotante { gap: 10px; padding: 12px; }
+  .clase-flotante strong { font-size: 18px; }
+  .clase-flotante-mensajes { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .clase-flotante, .clase-flotante-mensajes > span { animation: none; }
+  .clase-flotante-mensajes > span:first-child { visibility: visible; }
 }
