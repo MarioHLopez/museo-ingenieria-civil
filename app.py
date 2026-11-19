@@ -69,14 +69,15 @@ st.set_page_config(page_title="Museo Aula Civil", page_icon="🏛️", layout="w
 st.markdown(f"<style>{(BASE / 'estilos.css').read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
 
 
-@st.cache_data(show_spinner=False, max_entries=4)
-def leer_catalogo(datos: bytes):
-    return cargar_entregas(datos)
-
-
-@st.cache_data(show_spinner=False, max_entries=4)
-def preparar_obras(colecciones: tuple[bytes, ...]):
-    entregas = [entrega for datos in colecciones for entrega in leer_catalogo(datos)[0]]
+@st.cache_resource(show_spinner=False, max_entries=1)
+def preparar_obras(archivos: tuple[tuple[str, int, int], ...]):
+    """Una colección compartida; las obras no se modifican tras prepararlas."""
+    entregas = []
+    avisos = []
+    for nombre, _, _ in archivos:
+        catalogo, avisos_catalogo = cargar_entregas((BASE / nombre).read_bytes())
+        entregas.extend(catalogo)
+        avisos.extend(avisos_catalogo)
     obras = agrupar_obras(entregas)
     por_id = {obra.id: obra for obra in obras}
     for origen, destino in EQUIVALENCIAS:
@@ -84,7 +85,7 @@ def preparar_obras(colecciones: tuple[bytes, ...]):
             por_id[destino].entregas.extend(por_id.pop(origen).entregas)
     # Portada de la actividad retirada de la exposición a petición del docente.
     portada = "25d5f2474ce5fbf2cd65928e6269be1c6a77f2d4e4f76f90a16bfe5f161d546f"
-    return [obra for obra in por_id.values() if obra.id != portada]
+    return [obra for obra in por_id.values() if obra.id != portada], avisos
 
 
 @st.cache_data(show_spinner=False, max_entries=160)
@@ -129,22 +130,20 @@ if not st.session_state.get("dentro", False):
     st.stop()
 
 try:
-    colecciones = tuple((BASE / nombre).read_bytes() for nombre in ARCHIVOS_ENTREGAS)
+    archivos = []
+    for nombre in ARCHIVOS_ENTREGAS:
+        estado = (BASE / nombre).stat()
+        archivos.append((nombre, estado.st_mtime_ns, estado.st_size))
     with st.spinner("Preparando la exposición…"):
-        catalogos = [leer_catalogo(datos) for datos in colecciones]
-        entregas = [entrega for catalogo, _ in catalogos for entrega in catalogo]
-        avisos = [aviso for _, avisos_catalogo in catalogos for aviso in avisos_catalogo]
+        obras, avisos = preparar_obras(tuple(archivos))
 except (ValueError, OSError) as error:
     st.error(str(error))
     st.stop()
 for aviso in avisos:
     st.warning(aviso)
-if not entregas:
+if not obras:
     st.info("No se encontraron PDF ni imágenes en los archivos de entregas.")
     st.stop()
-
-with st.spinner("Colgando las obras y reuniendo los nombres de sus estudiantes…"):
-    obras = preparar_obras(colecciones)
 
 @st.fragment
 def mostrar_publicacion(obra, numero: int):
