@@ -254,6 +254,7 @@ div[class*="st-key-publicacion-"] [data-testid="stExpander"] summary p { font-si
 .clase-flotante { position: relative; display: flex; align-items: center; gap: 14px; width: min(480px, 100%); margin: 0 auto 36px; box-sizing: border-box; padding: 14px 18px; border: 3px outset #fff; border-radius: 16px; background: #a50077; color: #fff !important; text-decoration: none !important; box-shadow: 0 6px 0 #200050, 0 12px 30px #20005040; font-family: 'Courier New', monospace; animation: clase-colores 12s step-end infinite; }
 .clase-flotante-icono { display: grid; place-items: center; flex: 0 0 42px; height: 42px; background: #ffff00; color: #24004b; border-radius: 50%; font-size: 20px; box-shadow: 3px 3px 0 #24004b; }
 .clase-flotante-texto { flex: 1; min-width: 0; }
+.clase-flotante-detalle { display: block; margin-top: 5px; font-size: 11px; line-height: 1.4; overflow-wrap: break-word; }
 .clase-flotante strong { display: block; font-size: 21px; line-height: 1.2; color: #ffff00; text-shadow: 2px 2px #24004b; }
 .clase-flotante-mensajes { display: grid; margin-top: 5px; font-size: 11px; line-height: 1.4; }
 .clase-flotante-mensajes > span { grid-area: 1 / 1; visibility: hidden; animation: clase-mensaje 12s step-end infinite; }

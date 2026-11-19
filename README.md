@@ -55,6 +55,8 @@ La agrupación de obras está en `museo.py`. Los colores, la fachada y el feed s
 
 ## Compartir la exposición
 
+Los horarios y las instrucciones de activación de los accesos a clase están en [ENCUENTROS.md](ENCUENTROS.md). La selección automática del enlace está en `encuentros.py`, que también debe subirse al repositorio.
+
 El repositorio es https://github.com/MarioHLopez/museo-ingenieria-civil. GitHub aloja el código; la aplicación se ejecuta en **Streamlit Community Cloud**.
 
 1. Sube a la rama `main` los archivos `app.py`, `catalogo.py`, `museo.py`, `requirements.txt`, `estilos.css`, `.streamlit/config.toml`, los dos SVG, el avatar y ambos ZIP de entregas. Conserva sus nombres originales.

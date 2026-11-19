@@ -9,6 +9,7 @@ import pymupdf
 import streamlit as st
 
 from catalogo import cargar_entregas
+from encuentros import alerta_encuentro, seleccionar_encuentro
 from museo import agrupar_obras
 
 
@@ -18,8 +19,8 @@ DOCENTE = "Mg. Mario Hernan Lopez Arbelaez"
 CURSO = "Programación · Ingeniería Civil"
 PERIODO = "2026"
 MOSTRAR_CIERRE_DOCENTE = True
+# Activar solo cuando el docente lo solicite. Ver ENCUENTROS.md.
 MOSTRAR_ACCESO_CLASE = False
-ENLACE_CLASE = "https://teams.microsoft.com/meet/271941027693903?p=gOhUIeFDUP6dyKhkFe"
 ELOGIOS_OBRAS = (
     "¡Talento a prueba de sismos!",
     "¡Esto sí tiene buenos cimientos!",
@@ -243,7 +244,7 @@ with st.container(key="docente"):
       <p>Me alegra haberlos acompañado, pero también agradezco lo que ustedes me han permitido aprender como docente. Porque enseñar y aprender son procesos que nos transforman a ambos.</p>
       <p>Espero que conserven la curiosidad, la humildad para seguir aprendiendo y el carácter para afrontar los desafíos que encuentren en su camino.</p>
       <p><strong>Que las ganas de aprender, de cuestionar y de construir sigan siendo los cimientos de todo lo que emprendan.</strong></p>
-      <h2 class="agradecimiento-final">Gracias por construir<br>este espacio conmigo.</h2>
+      <h2 class="agradecimiento-final">Gracias por construir<br>este espacio.</h2>
       <p class="carta-cierre">Con gratitud y orgullo,<br><strong>{escape(DOCENTE)}</strong><br>Su docente</p>
       <div class="docente-datos"><span><b>{len(obras)}</b> obras</span><span><b>{len({nombre for obra in obras for nombre in obra.estudiantes})}</b> estudiantes</span><span>Un semestre compartido</span></div>
       <div class="instruccion-scroll">Cada esfuerzo deja huella. Gracias por ser parte de esta historia.</div>
@@ -253,12 +254,24 @@ with st.container(key="docente"):
 if not MOSTRAR_ACCESO_CLASE:
     st.stop()
 
-st.markdown(f"""
-<a class="clase-flotante" href="{escape(ENLACE_CLASE, quote=True)}"
-   target="_blank" rel="noopener noreferrer" aria-label="¡Entrar a clase! Abrir reunión de Microsoft Teams">
+@st.fragment(run_every="15s")
+def mostrar_acceso_clase():
+    encuentro = seleccionar_encuentro()
+    alerta = alerta_encuentro()
+    if alerta:
+        tipo, mensaje = alerta
+        if tipo == "aviso":
+            st.warning(mensaje)
+        else:
+            st.success(mensaje)
+    st.markdown(f"""
+<a class="clase-flotante" href="{escape(encuentro['enlace'], quote=True)}"
+   target="_blank" rel="noopener noreferrer" aria-label="Entrar a {escape(encuentro['titulo'], quote=True)} en Microsoft Teams">
   <span class="clase-flotante-icono" aria-hidden="true">▶</span>
   <span class="clase-flotante-texto">
     <strong>¡Entrar a clase!</strong>
+    <span class="clase-flotante-detalle">{escape(encuentro['titulo'])}</span>
+    <span class="clase-flotante-detalle">{escape(encuentro['horario'])}</span>
     <span class="clase-flotante-mensajes" aria-hidden="true">
       <span>¡Tu próxima gran idea empieza aquí!</span>
       <span>Del museo al aula… ¡vamos a Teams!</span>
@@ -268,3 +281,6 @@ st.markdown(f"""
   <span class="clase-flotante-flecha" aria-hidden="true">↗</span>
 </a>
 """, unsafe_allow_html=True)
+
+
+mostrar_acceso_clase()
