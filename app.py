@@ -20,7 +20,7 @@ CURSO = "Programación · Ingeniería Civil"
 PERIODO = "2026"
 MOSTRAR_CIERRE_DOCENTE = True
 # Activar solo cuando el docente lo solicite. Ver ENCUENTROS.md.
-MOSTRAR_ACCESO_CLASE = False
+MOSTRAR_ACCESO_CLASE = True
 ELOGIOS_OBRAS = (
     "¡Talento a prueba de sismos!",
     "¡Esto sí tiene buenos cimientos!",

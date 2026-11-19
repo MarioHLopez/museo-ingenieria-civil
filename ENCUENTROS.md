@@ -1,6 +1,6 @@
 # Acceso a las clases del jueves 19 de noviembre de 2026
 
-**Estado preparado: acceso oculto.** No activar hasta que Mario lo solicite.
+**Estado actual: acceso activado por petición de Mario.** Antes de las 10:59 a. m. del 19 de noviembre de 2026 se muestra el enlace de las 9; a partir de ese momento, el de las 11.
 
 Todos los horarios corresponden a **Colombia**, zona `America/Bogota` (UTC−5).
 
